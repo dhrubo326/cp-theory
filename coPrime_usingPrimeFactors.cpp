@@ -39,22 +39,19 @@ vector<int> getAllfactors(int n){
 	return allPrimeFactor;
 }
 
-void SOD(int x){
-	map<int, int>countDivisor;
+void coPrime(int x){
+	set<int>uniquePrimeFactors;
 	vector<int>factors = getAllfactors(x);
 	for(int i=0; i<factors.size(); i++){
-		countDivisor[factors[i]]++;
+		uniquePrimeFactors.insert(factors[i]);
 	}
-	int sum = 1;
-	for(auto i: countDivisor){
-		int addition = 1;
-		for(int j =1; j<=i.second; j++){
-			addition += i.first*j;
-		}
-		sum *= addition;
+	int sum = x;
+	for(auto i: uniquePrimeFactors){
+		sum *= (i-1);
+		sum /= i;
 	}
 	
-	cout<<"sum of divisor: "<< sum;
+	cout<<"Number of Co-prime: "<< sum;
 
 }
 
@@ -68,8 +65,8 @@ int main()
 	#endif 
 
 	findLeastPrime();
-	int x = 12;
-	SOD(x);
+	int x = 4;
+	coPrime(x);
 
 	return 0;
 }
